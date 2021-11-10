@@ -121,6 +121,7 @@
 <ul>
 <li>Added <code>id</code> argument to <code><a href="../reference/fix_dates.html">fix_dates()</a></code>. If not explicitly stated, the first column is assumed to contain row IDs.</li>
 <li>Added more useful error messages which provide both the date causing the error, and the associated ID.</li>
+<li>If <code>NULL</code> is given for <code>day.impute</code> or <code>month.impute</code> then <code><a href="../reference/fix_dates.html">fix_dates()</a></code> will error if there are any missing values for either day or month respectively. If <code>NA</code> is given for <code>day.impute</code> or <code>month.impute</code> then <code><a href="../reference/fix_dates.html">fix_dates()</a></code> will impute NA for any missing values for either day or month respectively</li>
 </ul>
 </div>
     <div id="datefixr-011" class="section level1">
