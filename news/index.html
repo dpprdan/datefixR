@@ -84,6 +84,9 @@
   </a>
 </li>
 <li>
+  <a href="../articles/datefixR.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -121,7 +124,9 @@
 <ul>
 <li>Added <code>id</code> argument to <code><a href="../reference/fix_dates.html">fix_dates()</a></code>. If not explicitly stated, the first column is assumed to contain row IDs.</li>
 <li>Added more useful error messages which provide both the date causing the error, and the associated ID.</li>
-<li>If <code>NULL</code> is given for <code>day.impute</code> or <code>month.impute</code> then <code><a href="../reference/fix_dates.html">fix_dates()</a></code> will error if there are any missing values for either day or month respectively. If <code>NA</code> is given for <code>day.impute</code> or <code>month.impute</code> then <code><a href="../reference/fix_dates.html">fix_dates()</a></code> will impute NA for any missing values for either day or month respectively</li>
+<li>Setting <code>day.impute = NA</code> or <code>month.impute = NA</code> will now result in NA if day or month is missing respectively in a date and a warning is issued. If <code>day.impute = NULL</code> or <code>month.impute = NULL</code> then the function will error if day or month is missing respectively in a date</li>
+<li>Added <code>datefixR</code> vignette which describes the package in more detail than the README</li>
+<li>Added citation file</li>
 </ul>
 </div>
     <div id="datefixr-011" class="section level1">
