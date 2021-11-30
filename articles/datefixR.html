@@ -85,7 +85,7 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nathansam/datefixR">datefixR</a></span><span class="op">)</span></code></pre></div>
-<p>This vignette describes the functionality of <code>datefixR</code> in more detail than the <a href="https://github.com/nathansam/datefixR">README</a>. <code>DatefixR</code> is a lightweight package consisting of a single user-accessible function, <code><a href="../reference/fix_dates.html">fix_dates()</a></code>, which converts dates written in different formats into R’s built-in <code>Date</code> class.</p>
+<p>This vignette describes the functionality of <code>datefixR</code> in more detail than the <a href="https://github.com/nathansam/datefixR">README</a>. <code>DatefixR</code> is a lightweight package consisting of a two user-accessible functions, <code><a href="../reference/fix_date.html">fix_date()</a></code> and <code><a href="../reference/fix_dates.html">fix_dates()</a></code>, which converts dates written in different formats into R’s built-in <code>Date</code> class. The former is designed to modify single character objects whilst the latter is intended for modifying columns of a data frame (or tibble).</p>
 <p>Practically, this package is most useful when handling date data which has been supplied via text boxes (instead of a date-specific input with a consistent date format). However, this package may also be useful to validate the format of date data (see <a href="#date-and-month-imputation">date and month imputation</a>).</p>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -93,7 +93,7 @@
 <div id="date-standardization" class="section level3">
 <h3 class="hasAnchor">
 <a href="#date-standardization" class="anchor"></a>Date standardization</h3>
-<p>Firstly, we will demonstrate date standardization without imputation. We consider a dataframe with two columns of dates in differing formats with no missing data.</p>
+<p>Firstly, we will demonstrate date standardization without imputation. We consider a data frame with two columns of dates in differing formats with no missing data.</p>
 <table class="table">
 <thead><tr class="header">
 <th align="right">id</th>
@@ -128,7 +128,7 @@
 </tr>
 </tbody>
 </table>
-<p><code><a href="../reference/fix_dates.html">fix_dates()</a></code> requires two arguments, <code>df</code>, a dataframe (or tibble) object and <code>col.names</code>, a character vector containing the names of columns to be standardized. By default, the first column of the dataframe is assumed to contain row IDs. These IDs are used if a warning or error is raised to assist with locating the source of the error. The ID column can also be manually provided via the <code>id</code> argument.</p>
+<p><code><a href="../reference/fix_dates.html">fix_dates()</a></code> requires two arguments, <code>df</code>, a data frame (or tibble) object and <code>col.names</code>, a character vector containing the names of columns to be standardized. By default, the first column of the data frame is assumed to contain row IDs. These IDs are used if a warning or error is raised to assist with locating the source of the error. The ID column can also be manually provided via the <code>id</code> argument.</p>
 <p>The output from this function is a data frame object with the selected date columns now belonging to the <code>Date</code> class.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fixed.dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fix_dates.html">fix_dates</a></span><span class="op">(</span><span class="va">bad.dates</span>,
@@ -169,6 +169,10 @@
 </tbody>
 </table>
 <p><code>datefixR</code> can handle many different formats including -, /, or white space separation, year-first or day-first, and month supplied as a number, an abbreviation or full length name. The most notable current omission is the month-first format of dates commonly seen in the US, however this format may be supported in the future.</p>
+<p><code><a href="../reference/fix_date.html">fix_date()</a></code> is similar to <code><a href="../reference/fix_dates.html">fix_dates()</a></code> but only applies to a single character object.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/fix_date.html">fix_date</a></span><span class="op">(</span><span class="st">"01 02 2014"</span><span class="op">)</span>
+<span class="co">#&gt; [1] "2014-02-01"</span></code></pre></div>
 </div>
 <div id="date-and-month-imputation" class="section level3">
 <h3 class="hasAnchor">
@@ -185,7 +189,7 @@
 </tr></tbody>
 </table>
 <p>converts to</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">imputed.dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fix_dates.html">fix_dates</a></span><span class="op">(</span><span class="va">impute.dates</span>, <span class="st">"some.date"</span><span class="op">)</span>
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">imputed.dates</span><span class="op">)</span></code></pre></div>
 <table class="table">
@@ -199,7 +203,7 @@
 </tr></tbody>
 </table>
 <p>The argument for defaulting to July is 1-2 July is halfway through the year (on a non leap year). Therefore assuming the year supplied is indeed correct, you are only a maximum of 6 months off from the true date. However, this behavior can be changed by supplying the <code>day.impute</code> and <code>month.impute</code> arguments with an integer corresponding to the desired day and month. For example, <code>day.impute = 1</code> and <code>month.impute = 1</code> results in the first day of January being imputed instead.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">imputed.dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fix_dates.html">fix_dates</a></span><span class="op">(</span><span class="va">impute.dates</span>,
                            <span class="st">"some.date"</span>,
                            day.impute <span class="op">=</span> <span class="fl">1</span>,
@@ -216,7 +220,7 @@
 </tr></tbody>
 </table>
 <p>The imputation mechanism can also be modified to impute <code>NA</code> if a month or day is missing by setting <code>day.impute</code> or <code>month.impute</code> to <code>NA</code>. This will also result in a warning being raised.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">imputed.dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fix_dates.html">fix_dates</a></span><span class="op">(</span><span class="va">impute.dates</span>,
                            <span class="st">"some.date"</span>,
                            month.impute <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span>
@@ -233,24 +237,28 @@
 </tr></tbody>
 </table>
 <p>Finally, imputation can be prevented by setting <code>day.impute</code> or <code>month.impute</code> to <code>NULL</code>. This will result in an error being raised if the day or month are missing respectively.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">imputed.dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fix_dates.html">fix_dates</a></span><span class="op">(</span><span class="va">impute.dates</span>,
                            <span class="st">"some.date"</span>,
                            month.impute <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
 <span class="co"># ERROR</span></code></pre></div>
+<p><code>day.impute</code> and <code>month.impute</code> can also be passed to <code><a href="../reference/fix_date.html">fix_date()</a></code> for similar functionality.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/fix_date.html">fix_date</a></span><span class="op">(</span><span class="st">"2014"</span>, day.impute <span class="op">=</span> <span class="fl">1</span>, month.impute <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="co">#&gt; [1] "2014-01-01"</span></code></pre></div>
 </div>
 </div>
 <div id="citation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#citation" class="anchor"></a>Citation</h2>
 <p>If you use this package in your research, please consider citing <code>datefixR</code>. An up-to-date citation can be obtained by running</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span><span class="op">(</span><span class="st">"datefixR"</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; To cite datefixR in publications use:</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;   Constantine-Cooke, Nathan 2021. datefixR: Fix Really Messy Dates in</span>
-<span class="co">#&gt;   R. R package version 0.1.1.9000. DOI: 10.5281/zenodo.5655311.</span>
+<span class="co">#&gt;   Constantine-Cooke, Nathan . datefixR: Fix Really Messy Dates in R. R</span>
+<span class="co">#&gt;   package version 0.1.1.9000. DOI: 10.5281/zenodo.5655311.</span>
 <span class="co">#&gt;   https://CRAN.R-project.org/package=datefixR</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; A BibTeX entry for LaTeX users is</span>
@@ -258,7 +266,6 @@
 <span class="co">#&gt;   @Manual{,</span>
 <span class="co">#&gt;     title = {{datefixR}: Fix Really Messy Dates in {R}},</span>
 <span class="co">#&gt;     author = {Nathan Constantine-Cooke},</span>
-<span class="co">#&gt;     year = {2021},</span>
 <span class="co">#&gt;     url = {https://CRAN.R-project.org/package=datefixR},</span>
 <span class="co">#&gt;     doi = {10.5281/zenodo.5655311},</span>
 <span class="co">#&gt;     note = {R package version 0.1.1.9000},</span>
