@@ -163,6 +163,10 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fix_date.html">fix_date</a></span><span class="op">(</span><span class="st">"01 02 2014"</span><span class="op">)</span>
 <span class="co">#&gt; [1] "2014-02-01"</span></code></pre></div>
+<p>Functions in <code>datefixR</code> assume day-first instead of month-first when day, month, and year are all given (unless year is given first). However this behaviour can be modified by passing <code>format = "mdy"</code> to function calls.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/fix_date.html">fix_date</a></span><span class="op">(</span><span class="st">"01 02 2014"</span>, format <span class="op">=</span> <span class="st">"mdy"</span><span class="op">)</span>
+<span class="co">#&gt; [1] "2014-01-02"</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="date-and-month-imputation">Date and month imputation<a class="anchor" aria-label="anchor" href="#date-and-month-imputation"></a>
@@ -179,7 +183,7 @@
 </tr></tbody>
 </table>
 <p>converts to</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">imputed.dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fix_dates.html">fix_dates</a></span><span class="op">(</span><span class="va">impute.dates</span>, <span class="st">"some.date"</span><span class="op">)</span>
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">imputed.dates</span><span class="op">)</span></code></pre></div>
 <table class="table">
@@ -193,7 +197,7 @@
 </tr></tbody>
 </table>
 <p>The argument for defaulting to July is 1-2 July is halfway through the year (on a non leap year). Therefore assuming the year supplied is indeed correct, you are only a maximum of 6 months off from the true date. However, this behavior can be changed by supplying the <code>day.impute</code> and <code>month.impute</code> arguments with an integer corresponding to the desired day and month. For example, <code>day.impute = 1</code> and <code>month.impute = 1</code> results in the first day of January being imputed instead.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">imputed.dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fix_dates.html">fix_dates</a></span><span class="op">(</span><span class="va">impute.dates</span>,
                            <span class="st">"some.date"</span>,
                            day.impute <span class="op">=</span> <span class="fl">1</span>,
@@ -210,7 +214,7 @@
 </tr></tbody>
 </table>
 <p>The imputation mechanism can also be modified to impute <code>NA</code> if a month or day is missing by setting <code>day.impute</code> or <code>month.impute</code> to <code>NA</code>. This will also result in a warning being raised.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">imputed.dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fix_dates.html">fix_dates</a></span><span class="op">(</span><span class="va">impute.dates</span>,
                            <span class="st">"some.date"</span>,
                            month.impute <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span>
@@ -227,13 +231,13 @@
 </tr></tbody>
 </table>
 <p>Finally, imputation can be prevented by setting <code>day.impute</code> or <code>month.impute</code> to <code>NULL</code>. This will result in an error being raised if the day or month are missing respectively.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">imputed.dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fix_dates.html">fix_dates</a></span><span class="op">(</span><span class="va">impute.dates</span>,
                            <span class="st">"some.date"</span>,
                            month.impute <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
 <span class="co"># ERROR</span></code></pre></div>
 <p><code>day.impute</code> and <code>month.impute</code> can also be passed to <code><a href="../reference/fix_date.html">fix_date()</a></code> for similar functionality.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fix_date.html">fix_date</a></span><span class="op">(</span><span class="st">"2014"</span>, day.impute <span class="op">=</span> <span class="fl">1</span>, month.impute <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; [1] "2014-01-01"</span></code></pre></div>
 </div>
@@ -242,7 +246,7 @@
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
 <p>If you use this package in your research, please consider citing <code>datefixR</code>. An up-to-date citation can be obtained by running</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"datefixR"</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; To cite datefixR in publications use:</span>

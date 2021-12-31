@@ -69,7 +69,7 @@ US system of MDY is not supported.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">fix_date</span><span class="op">(</span><span class="va">date</span>, day.impute <span class="op">=</span> <span class="fl">1</span>, month.impute <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">fix_date</span><span class="op">(</span><span class="va">date</span>, day.impute <span class="op">=</span> <span class="fl">1</span>, month.impute <span class="op">=</span> <span class="fl">7</span>, format <span class="op">=</span> <span class="st">"dmy"</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -82,6 +82,11 @@ defaults to 1.</p></dd>
 <dt>month.impute</dt>
 <dd><p>Integer. Month to be be imputed if not available.
 Defaults to 7 (July)</p></dd>
+<dt>format</dt>
+<dd><p>Character. The format which a date is mostly likely to be given
+in. Either <code>"dmy"</code> (default) or <code>"mdy"</code>. If year appears to have
+been given first, then YMD is assumed for the subject (format argument is
+not used)</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -89,7 +94,7 @@ Defaults to 7 (July)</p></dd>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><a href="fix_dates.html">fix_dates</a> Similar to <code>fix_date()</code> except is applicable
+    <div class="dont-index"><p><code><a href="fix_dates.html">fix_dates</a></code> Similar to <code>fix_date()</code> except is applicable
 to columns of a dataframe.</p></div>
     </div>
 
