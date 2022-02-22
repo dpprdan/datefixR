@@ -44,15 +44,15 @@
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://www.constantine-cooke.com" aria-label="Personal website">Constantine-Cooke.com</a>
-</li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
       <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://www.constantine-cooke.com" aria-label="Personal website">Constantine-Cooke.com</a>
+</li>
 <li class="nav-item">
   <a class="external-link nav-link" href="https://github.com/nathansam/datefixR/" aria-label="github">
     <span class="fab fa fab fa-github fa-lg"></span>
@@ -80,7 +80,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/nathansam/datefixR" class="external-link">datefixR</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.constantine-cooke.com/datefixR/" class="external-link">datefixR</a></span><span class="op">)</span></code></pre></div>
 <p>This vignette describes the functionality of <code>datefixR</code> in more detail than the <a href="https://github.com/nathansam/datefixR" class="external-link">README</a>. <code>DatefixR</code> is a lightweight package consisting of a two user-accessible functions, <code><a href="../reference/fix_date.html">fix_date()</a></code> and <code><a href="../reference/fix_dates.html">fix_dates()</a></code>, which converts dates written in different formats into R’s built-in <code>Date</code> class. The former is designed to modify single character objects whilst the latter is intended for modifying columns of a data frame (or tibble).</p>
 <p>Practically, this package is most useful when handling date data which has been supplied via text boxes (instead of a date-specific input with a consistent date format). However, this package may also be useful to validate the format of date data (see <a href="#date-and-month-imputation">date and month imputation</a>).</p>
 <div class="section level2">
