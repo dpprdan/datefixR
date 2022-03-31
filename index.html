@@ -99,10 +99,19 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org" class="external-link">"remotes"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"nathansam/datefixR"</span>, <span class="st">"devel"</span><span class="op">)</span></code></pre></div>
-<div class="section level3">
-<h3 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
-</h3>
+</div>
+<div class="section level2">
+<h2 id="package-vignette">Package vignette<a class="anchor" aria-label="anchor" href="#package-vignette"></a>
+</h2>
+<p><code>datefixR</code> has a “Getting Started” vignette which describes how to use this package in more detail than this page. View the vignette by either calling</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/browseVignettes.html" class="external-link">browseVignettes</a></span><span class="op">(</span><span class="st">"datefixR"</span><span class="op">)</span></code></pre></div>
+<p>or visiting the vignette on the <a href="https://www.constantine-cooke.com/datefixR/articles/datefixR.html">package website</a></p>
+</div>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.constantine-cooke.com/datefixR/">datefixR</a></span><span class="op">)</span>
 <span class="va">bad.dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>,
                         some.dates <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"02/05/92"</span>,
@@ -153,7 +162,7 @@
 </tbody>
 </table>
 <p>By default, <code>datefixR</code> imputes missing days of the month as 01, and missing months as 07 (July). However, this behavior can be modified via the <code>day.impute</code> or <code>month.impute</code> arguments.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"> <span class="va">example.df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>example <span class="op">=</span> <span class="st">"1994"</span><span class="op">)</span>
 
 <span class="fu"><a href="reference/fix_dates.html">fix_dates</a></span><span class="op">(</span><span class="va">example.df</span>, <span class="st">"example"</span>, month.impute <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
@@ -161,18 +170,17 @@
 <span class="co">#&gt; 1 1994-01-01</span></code></pre></div>
 <p>Functions in <code>datefixR</code> assume day-first instead of month-first when day, month, and year are all given (unless year is given first). However this behavior can be modified by passing <code>format = "mdy"</code> to function calls.</p>
 </div>
-<div class="section level3">
-<h3 id="limitations">Limitations<a class="anchor" aria-label="anchor" href="#limitations"></a>
-</h3>
+<div class="section level2">
+<h2 id="limitations">Limitations<a class="anchor" aria-label="anchor" href="#limitations"></a>
+</h2>
 <p>The package is written solely in R and seems fast enough for my current use cases (a few hundred rows). However, I may convert the core for loop to C++ in the future if I (or others) need it to be faster.</p>
 </div>
-<div class="section level3">
-<h3 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
-</h3>
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
 <p>If you use this package in your research, please consider citing <code>datefixR</code>! An up-to-date citation can be obtained by running</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"datefixR"</span><span class="op">)</span></code></pre></div>
-</div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
