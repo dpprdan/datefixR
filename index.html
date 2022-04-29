@@ -181,6 +181,38 @@
 <p>The package is written solely in R and seems fast enough for my current use cases (a few hundred rows). However, I may convert the core for loop to C++ in the future if I (or others) need it to be faster.</p>
 </div>
 <div class="section level2">
+<h2 id="similar-packages-to-datefixr">Similar packages to datefixR<a class="anchor" aria-label="anchor" href="#similar-packages-to-datefixr"></a>
+</h2>
+<div class="section level3">
+<h3 id="lubridate">
+<code>lubridate</code><a class="anchor" aria-label="anchor" href="#lubridate"></a>
+</h3>
+<p><a href="https://lubridate.tidyverse.org/reference/guess_formats.html" class="external-link"><code>lubridate::guess_formats()</code></a> can be used to guess a date format and <a href="https://lubridate.tidyverse.org/reference/parse_date_time.html" class="external-link"><code>lubridate::parse_date_time()</code></a> calls this function when it attempts to parse a vector into a POSIXct date-time object. However:</p>
+<ol style="list-style-type: decimal">
+<li>When a date fails to parse in <a href="https://lubridate.tidyverse.org" class="external-link">lubridate</a> then the user is simply told how many dates failed to parse. In <code>datefixR</code> the user is told the ID (assumed to be the first column by default but can be user-specified) corresponding to the date which failed to parse and reports the considered date: making it much easier to figure out which dates supplied failed to parse and why.</li>
+<li>When imputing a missing day or month, there is no user-control over this behaviour. For example, when imputing a missing month, the user may wish to impute July, the middle of the year, instead of January. However, January will always be imputed in <a href="https://lubridate.tidyverse.org" class="external-link">lubridate</a>. In <code>datefixR</code>, this behaviour can be controlled by the <code>month.impute</code> argument.</li>
+<li>These functions require all possible date formats to be specified in the <code>orders</code> argument, which may result in a date format not being considered if the user forgets to list one of the possible formats. By contrast, <code>datefixR</code> only needs a format to be specified if month-first is to be preferred over day-first when guessing a date.</li>
+</ol>
+<p>However, <a href="https://lubridate.tidyverse.org" class="external-link">lubridate</a> of course excels in general date manipulation and is an excellent tool to use alongside <code>datefixR</code>.</p>
+</div>
+<div class="section level3">
+<h3 id="anytime">
+<code>anytime</code><a class="anchor" aria-label="anchor" href="#anytime"></a>
+</h3>
+<p>An alternative function is <a href="https://dirk.eddelbuettel.com/code/anytime.html" class="external-link"><code>anytime::anydate()</code></a> which also attempts to convert dates to a consistent format (POSIXct). However <a href="http://dirk.eddelbuettel.com/code/anytime.html" class="external-link">anytime</a> assumes year, month, and day have all been provided and does not permit imputation. Moreover, if a date cannot be parsed, then the date is converted to an NA object and no warning is raised- which may lead to issues later in the analysis.</p>
+</div>
+<div class="section level3">
+<h3 id="speed-comparison">Speed comparison<a class="anchor" aria-label="anchor" href="#speed-comparison"></a>
+</h3>
+<p>Both <a href="https://lubridate.tidyverse.org" class="external-link">lubridate</a> and and <a href="http://dirk.eddelbuettel.com/code/anytime.html" class="external-link">anytime</a> use compiled code and therefore have the potential to be orders of magnitude faster than <code>datefixR</code>. However, in my own testing, I found <a href="http://dirk.eddelbuettel.com/code/anytime.html" class="external-link">anytime</a> to actually be slower than <code>datefixR</code>: consistently being over 3 times slower (testing up to 10,000 dates). <code>lubridate::parse_date_time()</code> (which is written in R) is an order of magnitude of time faster than <code>datefixR</code> and <code>lubridate::parse_date_time2()</code>, which is written in C but only allows numeric dates, is even faster. If you are don’t mind not having control over imputation, do not expect to have to deal with many unparsed dates, are confident you will specify all potential formats the supplied dates will be in, and you have many many dates to standardise (hundreds of thousands or more), <a href="https://lubridate.tidyverse.org" class="external-link">lubridate</a>’s functions may be a better option than <code>datefixR</code>.</p>
+</div>
+<div class="section level3">
+<h3 id="not-actively-maintained-alternatives">Not actively maintained alternatives<a class="anchor" aria-label="anchor" href="#not-actively-maintained-alternatives"></a>
+</h3>
+<p><a href="https://www.repidemicsconsortium.org/linelist/reference/guess_dates.html" class="external-link"><code>linelist::guess_dates()</code></a> appears to also have performed a somewhat similar role to the above functions. However, this function did not leave the experimental lifecycle phase and the package itself is no longer available on CRAN.</p>
+</div>
+</div>
+<div class="section level2">
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
 <p>If you use this package in your research, please consider citing <code>datefixR</code>! An up-to-date citation can be obtained by running</p>
