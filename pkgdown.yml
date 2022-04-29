@@ -3,7 +3,7 @@ pkgdown: 2.0.3
 pkgdown_sha: ~
 articles:
   datefixR: datefixR.html
-last_built: 2022-04-27T12:32Z
+last_built: 2022-04-29T14:40Z
 urls:
   reference: https://www.constantine-cooke.com/datefixR/reference
   article: https://www.constantine-cooke.com/datefixR/articles
