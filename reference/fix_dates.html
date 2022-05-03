@@ -125,17 +125,23 @@ applied to character objects.</p></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">bad.dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>,</span>
-<span class="r-in">                        some.dates <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"02/05/92"</span>,</span>
-<span class="r-in">                                       <span class="st">"01-04-2020"</span>,</span>
-<span class="r-in">                                       <span class="st">"1996/05/01"</span>,</span>
-<span class="r-in">                                       <span class="st">"2020-05-01"</span>,</span>
-<span class="r-in">                                       <span class="st">"02-04-96"</span><span class="op">)</span>,</span>
-<span class="r-in">                        some.more.dates <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2015"</span>,</span>
-<span class="r-in">                                            <span class="st">"02/05/00"</span>,</span>
-<span class="r-in">                                            <span class="st">"05/1990"</span>,</span>
-<span class="r-in">                                            <span class="st">"2012-08"</span>,</span>
-<span class="r-in">                                            <span class="st">"jan 2020"</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">bad.dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span class="r-in">  id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span>,</span>
+<span class="r-in">  some.dates <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="st">"02/05/92"</span>,</span>
+<span class="r-in">    <span class="st">"01-04-2020"</span>,</span>
+<span class="r-in">    <span class="st">"1996/05/01"</span>,</span>
+<span class="r-in">    <span class="st">"2020-05-01"</span>,</span>
+<span class="r-in">    <span class="st">"02-04-96"</span></span>
+<span class="r-in">  <span class="op">)</span>,</span>
+<span class="r-in">  some.more.dates <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span class="r-in">    <span class="st">"2015"</span>,</span>
+<span class="r-in">    <span class="st">"02/05/00"</span>,</span>
+<span class="r-in">    <span class="st">"05/1990"</span>,</span>
+<span class="r-in">    <span class="st">"2012-08"</span>,</span>
+<span class="r-in">    <span class="st">"jan 2020"</span></span>
+<span class="r-in">  <span class="op">)</span></span>
+<span class="r-in"><span class="op">)</span></span>
 <span class="r-in"><span class="va">fixed.df</span> <span class="op">&lt;-</span> <span class="fu">fix_dates</span><span class="op">(</span><span class="va">bad.dates</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"some.dates"</span>, <span class="st">"some.more.dates"</span><span class="op">)</span><span class="op">)</span></span>
 </code></pre></div>
     </div>
