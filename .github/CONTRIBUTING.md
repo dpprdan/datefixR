@@ -6,11 +6,11 @@ First of all, thanks for considering contributing to our_package!
 
 datefixR is an open source project and is not directly funded
 
-[repo]: https://github.com/nathansam/datefixR
-[issues]: https://github.com/nathansam/datefixR/issues
-[new_issue]: https://github.com/nathansam/datefixR/issues/new
-[website]: https://constantine-cooke.com/datefixR/
-[citation]: https://www.constantine-cooke.com/datefixR/authors.html#citation
+[repo]: https://github.com/ropensci/datefixR
+[issues]: https://github.com/ropensci/datefixR/issues
+[new_issue]: https://github.com/ropensci/datefixR/issues/new
+[website]: https://docs.ropensci.org/datefixR/
+[citation]: https://docs.ropensci.org/datefixR/authors.html#citation
 [email]: mailto:nathan.constantine-cooke@ed.ac.uk
 
 ## How you can contribute
@@ -66,6 +66,10 @@ Functions are described as comments near their code and translated to documentat
 
 Care to fix bugs or implement new functionality for our_package? Awesome! 👏 Have a look at the [issue list][issues] and leave a comment on the things you want to work on. See also the development guidelines below.
 
+We also welcome support for adding names of months in different languages! 🌍 If 
+you are interested in adding the months of the year in your language, please 
+see [R/months.R](https://github.com/ropensci/datefixR/blob/main/R/months.R)
+
 ## Development guidelines
 
 We try to follow the [GitHub flow](https://guides.github.com/introduction/flow/) for development.
@@ -75,7 +79,10 @@ enforced by [the styler package](https://www.tidyverse.org/blog/2017/12/styler-1
 Before committing your code, try to remember to call  `styler::style_pkg()`.
 Do not worry if you forget to call this function though! When you open a pull
 request, a bot should try to run both `devtools::document()` and
-`styler::style_pkg()` on your code anyway.
+`styler::style_pkg()` on your code anyway. This package also uses
+[fledge](https://cynkra.github.io/fledge/) to update NEWS.md. If your change
+should be included in the package change log, start your commit with  - to ensure
+your change will be recorded in the change log. 
 
 1. Fork [this repo][repo] and clone it to your computer. To learn more about this process, see [this guide](https://guides.github.com/activities/forking/).
 2. If you have forked and cloned the project before and it has been a while since you worked on it, [pull changes from the original repo](https://help.github.com/articles/merging-an-upstream-repository-into-your-fork/) to your clone by using `git pull upstream master`.
@@ -85,5 +92,6 @@ request, a bot should try to run both `devtools::document()` and
     * Test your code (bonus points for adding unit tests).
     * Document your code (see function documentation above).
     * Check your code with `devtools::check()` and aim for 0 errors and warnings.
-5. Commit and push your changes.
+5. Commit and push your changes. Remember to start your commit with - to update
+the change log (NEWS.md)
 6. Submit a [pull request](https://guides.github.com/activities/forking/#making-a-pull-request).

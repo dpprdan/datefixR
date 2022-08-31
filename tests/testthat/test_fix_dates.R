@@ -1,4 +1,5 @@
 test_that("fix_dates works for a series of malformed dates", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   bad.dates <- data.frame(
     id = seq(7),
     some.dates = c(
@@ -50,6 +51,7 @@ test_that("fix_dates works for a series of malformed dates", {
 })
 
 test_that("returns error for dates that are malformed beyond auto fix", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   bad.dates <- data.frame(
     id = seq(9),
     some.dates = c(
@@ -68,6 +70,7 @@ test_that("returns error for dates that are malformed beyond auto fix", {
 })
 
 test_that("Handle empty dates correctly", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   really.bad.dataframe <- data.frame(
     id = seq(2),
     some.dates = c(NA, "")
@@ -84,6 +87,7 @@ test_that("Handle empty dates correctly", {
 })
 
 test_that("error if unexpected data type", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   exvector <- c(1, 2, 3)
   expect_error(
     fix_dates(exvector, "some.dates"),
@@ -97,6 +101,7 @@ test_that("error if unexpected data type", {
 })
 
 test_that("error if day.impute or month.impute are wrong format", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   exvector <- c(1, 2, 3)
   expect_error(
     fix_dates(exvector, "some.dates"),
@@ -165,6 +170,7 @@ test_that("error if day.impute or month.impute are wrong format", {
 })
 
 test_that("error if day.impute or month.impute are in wrong format", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   temp <- data.frame(example = "1994")
 
   expect_equal(
@@ -174,6 +180,7 @@ test_that("error if day.impute or month.impute are in wrong format", {
 })
 
 test_that("Error if month out of bounds", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   temp <- data.frame(id = 1, date = "13-1994")
 
   expect_error(
@@ -183,6 +190,7 @@ test_that("Error if month out of bounds", {
 })
 
 test_that("Error if day out of bounds", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   temp <- data.frame(id = 1, date = "34-12-1994")
 
   expect_error(
@@ -192,6 +200,7 @@ test_that("Error if day out of bounds", {
 })
 
 test_that("Error if day out of bounds", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   temp <- data.frame(id = 1, date = "34-12-1994")
 
   expect_error(
@@ -202,6 +211,7 @@ test_that("Error if day out of bounds", {
 
 
 test_that("Imputing day with NA results in NA", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   temp <- data.frame(id = 1, date = "04-1994")
   expect_warning(
     date.guess <- fix_dates(temp, "date", day.impute = NA),
@@ -212,6 +222,7 @@ test_that("Imputing day with NA results in NA", {
 
 
 test_that("Imputing month with NA results in NA", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   temp <- data.frame(id = 1, date = "1994")
   expect_warning(
     date.guess <- fix_dates(temp, "date", month.impute = NA),
@@ -225,6 +236,7 @@ test_that("Imputing month with NA results in NA", {
 
 
 test_that("Error if imputing month with NULL", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   temp <- data.frame(id = 1, date = "1994")
   expect_error(
     fix_dates(temp, "date", month.impute = NULL),
@@ -233,6 +245,7 @@ test_that("Error if imputing month with NULL", {
 })
 
 test_that("Error if imputing day with NULL", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   temp <- data.frame(id = 1, date = "07-1994")
   expect_error(
     fix_dates(temp, "date", day.impute = NULL),
@@ -242,6 +255,7 @@ test_that("Error if imputing day with NULL", {
 
 
 test_that("fix_dates works for a mdy format", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   bad.dates <- data.frame(
     id = seq(6),
     some.dates = c(
@@ -289,4 +303,29 @@ test_that("fix_dates works for a mdy format", {
   expected.df$some.dates <- as.Date(expected.df$some.dates)
   expected.df$some.more.dates <- as.Date(expected.df$some.more.dates)
   expect_equal(fixed.df, expected.df)
+})
+
+test_that("fix_dates is deprecated", {
+  bad.dates <- data.frame(
+    id = seq(7),
+    some.dates = c(
+      "02/05/92",
+      "01-04-2020",
+      "1996/05/01",
+      "2020-05-01",
+      "02-04-96",
+      "2015",
+      "Sept 2009"
+    ),
+    some.more.dates = c(
+      "02/05/00",
+      "05/1990",
+      "2012-08",
+      "apr-21",
+      "mar-65",
+      "feb 84",
+      "5 sept 2021"
+    )
+  )
+  expect_snapshot(fix_dates(bad.dates, c("some.dates", "some.more.dates")))
 })

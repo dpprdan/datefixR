@@ -1,5 +1,5 @@
-
-test_that("fix_date work for a series of malformed dates", {
+test_that("fix_date works for a series of malformed dates", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   bad.date <- "02 03 2021"
   fixed.date <- fix_date(bad.date)
   expect_equal(fixed.date, as.Date("2021-03-02"))
@@ -39,22 +39,26 @@ test_that("fix_date work for a series of malformed dates", {
 })
 
 test_that("fix_date returns NA if NA is given", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   bad.date <- NA
   fixed.date <- fix_date(bad.date)
-  expect_equal(fixed.date, NA)
+  expect_equal(fixed.date, as.Date(NA))
 })
 
 test_that("error if date given isn't character", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   bad.date <- 15
   expect_error(fix_date(bad.date), "date should be a character \n")
 })
 
 test_that("error if date given has over 4 digits for year", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   bad.date <- "202312-12-2"
   expect_error(fix_date(bad.date), "unable to tidy a date")
 })
 
 test_that("Test NA imputed when provided", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   bad.date <- "1990-5"
   expect_warning(
     date.guess <- fix_date(bad.date, day.impute = NA),
@@ -65,15 +69,22 @@ test_that("Test NA imputed when provided", {
 
 
 test_that("fix_date works for mdy format", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   bad.date <- "07/15/11"
   fixed.date <- fix_date(bad.date, format = "mdy")
   expect_equal(fixed.date, as.Date("2011-07-15"))
 })
 
 test_that("unexpected format raises error", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   bad.date <- "07/15/11"
   expect_error(
     fix_date(bad.date, format = "ydm"),
     "format should be either 'dmy' or 'mdy' \n"
   )
+})
+
+test_that("fix_date is deprecated", {
+  bad.date <- "02 03 2021"
+  expect_snapshot(fix_date(bad.date))
 })

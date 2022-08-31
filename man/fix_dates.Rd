@@ -43,6 +43,8 @@ A \code{dataframe} or \code{tibble} object. Dependent on the type of
 \code{df}. Selected columns are of type \code{Date}
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
 Cleans up a \code{dataframe} object which has date columns
 entered via a free-text box (possibly by different users) and are therefore
 in a non-standardized format. Supports numerous separators including /,-, or
@@ -70,8 +72,11 @@ bad.dates <- data.frame(
   )
 )
 fixed.df <- fix_dates(bad.dates, c("some.dates", "some.more.dates"))
+# ->
+fixed.df <- fix_date_df(bad.dates, c("some.dates", "some.more.dates"))
 }
 \seealso{
-\code{\link{fix_date}} Similar to \code{fix_dates()} except can only be
-applied to character objects.
+\code{\link{fix_date}} Similar to \code{fix_dates()} except can only
+be applied to character objects.
 }
+\keyword{internal}

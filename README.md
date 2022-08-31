@@ -1,26 +1,37 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# datefixR <img src="man/figures/logo.png" align="right" width="150" />
+# datefixR <img src="man/figures/logo.png" align="right" width="150"/>
 
 <!-- badges: start -->
 
-| Usage                                                                                                                                 | Release                                                                                                                                          | Development                                                                                                                                                                                            |
-| ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| ![R](https://img.shields.io/badge/r-%23276DC3.svg?style=for-the-badge&logo=r&logoColor=white)                                         | [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/datefixR)](https://cran.r-project.org/package=datefixR)                             | [![R build status](https://github.com/nathansam/datefixR/workflows/CI/badge.svg)](https://github.com/nathansam/datefixR/actions)                                                                       |
-| [![License: GPL-3](https://img.shields.io/badge/License-GPL3-green.svg)](https://opensource.org/licenses/GPL-3.0)                     | [![datefixR status badge](https://nathansam.r-universe.dev/badges/datefixR)](https://nathansam.r-universe.dev)                                   | [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) |
-| [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/grand-total/datefixR?color=blue)](https://r-pkg.org/pkg/datefixR) | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5655311.svg)](https://doi.org/10.5281/zenodo.5655311)                                        | [![codecov](https://codecov.io/gh/nathansam/datefixR/branch/main/graph/badge.svg?token=lb83myWBXt)](https://app.codecov.io/gh/nathansam/datefixR)                                                      |
-|                                                                                                                                       | [![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/533_status.svg)](https://github.com/ropensci/software-review/issues/533) | [![Tidyverse style guide](https://img.shields.io/static/v1?label=Code%20Style&message=Tidyverse&color=1f1c30)](https://style.tidyverse.org)                                                            |
+| Usage                                                                                                                                                                    | Release                                                                                                                                          | Development                                                                                                                                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| ![R](https://img.shields.io/badge/r-%23276DC3.svg?style=for-the-badge&logo=r&logoColor=white)                                                                            | [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/datefixR)](https://cran.r-project.org/package=datefixR)                             | [![R build status](https://github.com/ropensci/datefixR/workflows/CI/badge.svg)](https://github.com/ropensci/datefixR/actions)                                                                         |
+| [![License: GPL-3](https://img.shields.io/badge/License-GPL3-green.svg)](https://opensource.org/licenses/GPL-3.0)                                                        | [![datefixR status badge](https://ropensci.r-universe.dev/badges/datefixR)](https://ropensci.r-universe.dev/ui#package:datefixR)                 | [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) |
+| [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/grand-total/datefixR?color=blue)](https://r-pkg.org/pkg/datefixR)                                    | [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5655311.svg)](https://doi.org/10.5281/zenodo.5655311)                                        | [![codecov](https://codecov.io/gh/ropensci/datefixR/branch/main/graph/badge.svg?token=zycOVwlq1m)](https://app.codecov.io/gh/ropensci/datefixR)                                                        |
+| ![website status](https://img.shields.io/website?down_color=red&down_message=offline&up_color=green&up_message=online&url=https%3A%2F%2Fdocs.ropensci.org%2FdatefixR%2F) | [![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/533_status.svg)](https://github.com/ropensci/software-review/issues/533) | [![Tidyverse style guide](https://img.shields.io/static/v1?label=Code%20Style&message=Tidyverse&color=1f1c30)](https://style.tidyverse.org)                                                            |
 
 <!-- badges: end -->
 
-`datefixR` is designed to standardize messy date data, such as dates
-entered by different people via text boxes, by converting the dates to
-R’s Date data type.
+`datefixR` standardizes dates in different formats or with missing data:
+for example dates which have been provided from free text web forms.
 
-This package arose from my own fights with messy date data where dates
-were written in many different formats e.g 01-jan-15, 2015 04 02,
-10/12/2010 and more.
+There are many different formats dates are commonly represented with:
+the order of day, month, or year can differ, different separators (“-”,
+“/”, or whitespace) can be used, months can be numerical, names, or
+abbreviations and year given as two digits or four. `datefixR` takes
+dates in all these different formats and converts them to R’s built-in
+date class. If `datefixR` cannot standardize a date, such as because it
+is too malformed, then the user is told which date cannot be
+standardized and the corresponding ID for the row. `datefixR` also
+allows the imputation of missing days and months with user-controlled
+behavior.
+
+<img src="man/figures/example.svg" width="800"/>
+
+Not familiar with R or want to quickly try out `datefixR`? Check out the
+shiny app [here](https://nathansam.shinyapps.io/datefixr/).
 
 ## Installation instructions
 
@@ -34,9 +45,9 @@ The most up-to-date (hopefully) stable version of `datefixR` can be
 installed via [r-universe](https://r-universe.dev/search/)
 
 ``` r
-# Enable universe(s) by nathansam
+# Enable universe(s) by ropensci
 options(repos = c(
-  nathansam = 'https://nathansam.r-universe.dev',
+  ropensci = 'https://ropensci.r-universe.dev',
   CRAN = 'https://cloud.r-project.org'))
 
 install.packages('datefixR')
@@ -47,7 +58,7 @@ the development version can be installed via
 
 ``` r
 if (!require("remotes")) install.packages("remotes")
-remotes::install_github("nathansam/datefixR", "devel")
+remotes::install_github("ropensci/datefixR", "devel")
 ```
 
 ## Package vignette
@@ -61,25 +72,34 @@ browseVignettes("datefixR")
 ```
 
 or visiting the vignette on the [package
-website](https://www.constantine-cooke.com/datefixR/articles/datefixR.html)
+website](https://docs.ropensci.org/datefixR/articles/datefixR.html)
 
 ## Usage
 
+`datefixR` is most commonly used to standardize columns of date data in
+a data frame or tibble. For this demonstration, we will use an example
+toy dataset provided alongside the package, `exampledates`.
+
 ``` r
 library(datefixR)
-bad.dates <- data.frame(id = seq(5),
-                        some.dates = c("02/05/92",
-                                       "01-04-2020",
-                                       "1996/05/01",
-                                       "2020-05-01",
-                                       "02-04-96"),
-                        some.more.dates = c("2015",
-                                            "02/05/00",
-                                            "05/1990",
-                                            "2012-08",
-                                            "jan 2020")
-                        )
-fixed.df <- fix_dates(bad.dates, c("some.dates", "some.more.dates"))
+data("exampledates")
+knitr::kable(exampledates)
+```
+
+| id | some.dates  | some.more.dates |
+| -: | :---------- | :-------------- |
+|  1 | 02 05 92    | 2015            |
+|  2 | 01-04-2020  | 02/05/00        |
+|  3 | 1996/05/01  | 05/1990         |
+|  4 | 2020-may-01 | 2012-08         |
+|  5 | 02-04-96    | jan 2020        |
+
+We can standardize these date columns by using the `fix_date_df()`
+function and passing the data frame/tibble object and a character vector
+of column names for the corresponding columns to fix.
+
+``` r
+fixed.df <- fix_date_df(exampledates, c("some.dates", "some.more.dates"))
 knitr::kable(fixed.df)
 ```
 
@@ -98,7 +118,7 @@ the `day.impute` or `month.impute` arguments.
 ``` r
  example.df <- data.frame(example = "1994")
 
-fix_dates(example.df, "example", month.impute = 1)
+fix_date_df(example.df, "example", month.impute = 1)
 #>      example
 #> 1 1994-01-01
 ```
@@ -109,6 +129,14 @@ this behavior can be modified by passing `format = "mdy"` to function
 calls.
 
 ## Limitations
+
+Date and time data are often reported together in the same variable
+(known as “datetime”). However datetime formats are not supported by
+`datefixR`. The current rationale is this package is mostly used to
+handle dates entered via free text web forms and it is much less common
+for both date and time to be reported together in this input method.
+However, if there is significant demand for support for datetime data in
+the future this may added.
 
 The package is written solely in R and seems fast enough for my current
 use cases (a few hundred rows). However, I may convert the core for loop
@@ -177,6 +205,16 @@ better option than `datefixR`.
 appears to also have performed a somewhat similar role to the above
 functions. However, this function did not leave the experimental
 lifecycle phase and the package itself is no longer available on CRAN.
+
+## Contributing to datefixR
+
+If you are interested in contributing to `datefixR`, please read our
+[contributing
+guide](https://github.com/ropensci/datefixR/blob/main/.github/CONTRIBUTING.md).
+
+Please note that this package is released with a [Contributor Code of
+Conduct](https://ropensci.org/code-of-conduct/). By contributing to this
+project, you agree to abide by its terms.
 
 ## Citation
 
