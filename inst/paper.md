@@ -54,7 +54,7 @@ can be modified by the user to impute a specific day or month or, if data are
 missing, impute NA or intentionally error.
 
 `datefixR` has been used in research which is currently undergoing peer review
-[@Constantine-Cooke2022] and has gathered a user base: having been downloaded
+[@ConstantineCooke2022] and has gathered a user base: having been downloaded
 from Rstudio's CRAN mirror approximately 4000 times to date. 
 
 There are R packages which provide similar functionality to `datefixR`, namely
