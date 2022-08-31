@@ -1,5 +1,5 @@
 ---
-title: 'datefixR: Fix really messy dates'
+title: 'datefixR: Standardize Dates in Different Formats or with Missing Data'
 tags:
   - R
   - dates
@@ -8,48 +8,56 @@ tags:
 authors:
   - name: Nathan Constantine-Cooke
     orcid: 0000-0002-4437-8713
-    affiliation: "1, 2" # (Multiple affiliations must be quoted)
+    affiliation: "1, 2"
 affiliations:
  - name: MRC Human Genetics Unit, University of Edinburgh, UK
    index: 1
  - name: Centre for Genomic and Experimental Medicine, University of Edinburgh, UK
    index: 2
-date: 11 May 2022
+date: 31 August 2022
 bibliography: paper.bib
 ---
 
 # Summary
 
-Dates can be represented in many different formats and, often in the case of
-dates being recalled from memory, may be missing partial information such as day
-of the month of the month itself. Whilst ensuring date data is supplied via a
-date specific input field in a webform (which validates the date or otherwise
-enforces consistency across entries) avoids these problems, study design for a
-research project may have not used this approach: especially if the study design
-involves a subject questionnaire which has been designed and deployed without
-the input of statisticians. Situations where date data has been entered via a
-free text box by different people can be a major inconvenience for statisticians
-using the data who must first standardise all date data and impute missing data. 
+There are many different formats dates are commonly represented with: the order
+of day, month, or year can differ, different separators (“-”, “/”, or
+whitespace) can be used, months can be numerical, names, or abbreviations and
+year given as two digits or four. `datefixR`, an Ropensci R package, takes dates
+in all these different formats and converts them to R’s built-in date class.
+
+Date data may also have been recalled from memory and be missing partial
+information such as day of the month of the month itself. `datefixR` allows easy
+imputation of missing date data with control over how dates are imputed. 
+
+`datefixR` has multilingual support for dates: supporting English, French,
+German, Spanish, and Portuguese at present. `datefixR's` functionality is also
+available as a Shiny web application.
 
 # Statement of need
 
-The `datefixR` R package automates much of the work required to standardise and
+The `datefixR` R package automates much of the work required to standardize and
 perform naïve date imputation whilst also being flexible enough to meet users’
-specific needs. When standardising, `datefixR` permits whitespace, “/” and “-“
-separators for supplied data in addition to “dmy”, “ymd” and “mdy” date order
-(although “mdy” must be specified by the user to be preferred over “dmy” due to
-ambiguity). Months are supported as full, abbreviation, or numerical formats.
+specific needs.  `datefixR` supports whitespace, “/” and “-“ or "de" separators
+for supplied data in addition to “dmy”, “ymd” and “mdy” date order (although
+“mdy” must be specified by the user to be preferred over “dmy” to resolve
+potential conflicts over ambiguity). Months are supported as full
+names or abbreviations (in multiple languages) or as a numerical format.
 Dates are formatted to R’s built-in `Date` class which follows the ISO 8601
-standard [@ISO]. If a date cannot be standardised, then datefixR informs the
-user which dates cannot be standardised and the corresponding row ID (assumed to
-be given by the first column unless specified). 
+standard [@ISO]. If a date cannot be standardized, then datefixR informs the
+user which dates cannot be standardized and the corresponding row ID (assumed to
+be given by the first column unless user-specified). 
 
-`datefixR` also imputes missing data by default imputing a missing month as July
-and a missing day as the 1st. However, this behaviour can be modified by the
-user to impute a specific day or month, impute NA in the presence of an NA, or
-intentionally error if these data are missing.
+`datefixR` also imputes missing data by imputing a missing month as July
+and a missing day as the 1st day of the month by default. However, this behavior
+can be modified by the user to impute a specific day or month or, if data are
+missing, impute NA or intentionally error.
 
-There are R packages which provide similar functionality, namely
+`datefixR` has been used in research which is currently undergoing peer review
+[@Constantine-Cooke2022] and has gathered a user base: having been downloaded
+from Rstudio's CRAN mirror approximately 4000 times to date. 
+
+There are R packages which provide similar functionality to `datefixR`, namely
 `guess_formats()` and `parse_date_time()` from `lubridate` [@lubridate] and
 `anydate ()` from the `anytime` [@anytime] package. However, there are
 limitations to these functions where `datefixR` prevails. If a date fails to
